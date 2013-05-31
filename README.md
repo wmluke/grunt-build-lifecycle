@@ -61,6 +61,12 @@ You can run build phases individually with `grunt phase-<name>`, where name is o
 
 For example, based on the above example `grunt phase-compile` runs the `coffee` and `compass` tasks.
 
+Additionally, you can skip phases with the `--skip` parameter.
+
+For example, `grunt install --skip=validate,test` will skip the `validate` and `test` phases.
+
+To skip all tests phases, use `--skipTests`.
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
