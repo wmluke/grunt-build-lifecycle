@@ -53,7 +53,7 @@ grunt.initConfig({
 });
 ```
 
-This will create the following grunt tasks: `validate`, `compile`, `test`, `package`, `integration-test`, `verify`, `install`, and `deploy`.  Running any of these task will run all the preceding lifecycle task sequentially.
+This will create the following grunt tasks: `validate`, `compile`, `test`, `package`, `integration-test`, `verify`, `install`, and `deploy`.  Running any of these tasks will run all the preceding lifecycle tasks sequentially.
 
 For example, `grunt test` runs the `validate`, `compile`, and `test` tasks.
 
