@@ -17,7 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-build-lifecycle');
 ```
 
-## The "build_lifecycle" task
+## The "lifecycle" task
 
 ### Overview
 In your project's Gruntfile, add a section named `lifecycle` to the data object passed into `grunt.initConfig()`.
