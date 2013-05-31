@@ -1,6 +1,6 @@
 # grunt-build-lifecycle
 
-> Build lifecycle for grunt
+> Flexible build lifecycles for grunt
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -67,9 +67,35 @@ For example, `grunt install --skip=validate,test` will skip the `validate` and `
 
 To skip all tests phases, use `--skipTests`.
 
+But that's not all.  You can define your own set of lifecycle phases.  Here's another example...
+
+```js
+grunt.initConfig({
+    lifecycle: {
+        lint: [
+            'jshint',
+            'csslint'
+        ],
+        compile: [
+            'coffee',
+            'compass'
+        ],
+        unit-test: [
+            'connect:test',
+            'karma:unit'
+        ],
+        package: [
+            'concat',
+            'uglify'
+        ],
+        e2e-test: [
+            'karma:e2e'
+        ],
+        run: [
+            'server'
+        ]
+    }
+});
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_

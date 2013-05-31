@@ -12,30 +12,21 @@ module.exports = function (grunt) {
 
     var _ = require('underscore');
 
-    var buildPhases = [
-        'phase-validate',
-        'phase-compile',
-        'phase-test',
-        'phase-package',
-        'phase-integration-test',
-        'phase-verify',
-        'phase-install',
-        'phase-deploy'
-    ];
+    var buildPhases = _.chain(grunt.config.get('lifecycle')).keys().value();
 
     function createBuildPhaseTask(phase) {
-        var phases = grunt.config.get('lifecycle.' + phase) || [];
-        return phases.length === 0 ? [] : function () {
-            grunt.task.run(phases);
+        var phaseTasks = grunt.config.get('lifecycle.' + phase) || [];
+        return phaseTasks.length === 0 ? [] : function () {
+            grunt.task.run(phaseTasks);
         };
     }
 
     function createBuildCycleTask(phase) {
-        var index = buildPhases.indexOf('phase-' + phase);
+        var index = buildPhases.indexOf(phase);
         var skip = _.chain((grunt.option('skip') || '').split(','))
             .compact()
             .map(function (phase) {
-                return 'phase-' + phase.trim()
+                return phase.trim()
             })
             .value();
 
@@ -47,33 +38,25 @@ module.exports = function (grunt) {
         var phases = index > -1 ? buildPhases.slice(0, index + 1) : [];
         return function () {
             grunt.log.writeln('Skipping build phases: ' + grunt.log.wordlist(skip));
-            grunt.task.run(_(phases).difference(skip));
+            grunt.task.run(_.chain(phases)
+                .difference(skip)
+                .map(function (phase) {
+                    return 'phase-' + phase;
+                }).value()
+            );
         };
     }
 
-    /**
-     * Define build phase tasks
-     */
+    _.each(buildPhases, function (phase) {
+        /**
+         * Define build phase tasks
+         */
+        grunt.registerTask('phase-' + phase, createBuildPhaseTask(phase));
 
-    grunt.registerTask('phase-validate', createBuildPhaseTask('validate'));
-    grunt.registerTask('phase-compile', createBuildPhaseTask('compile'));
-    grunt.registerTask('phase-test', createBuildPhaseTask('test'));
-    grunt.registerTask('phase-package', createBuildPhaseTask('package'));
-    grunt.registerTask('phase-integration-test', createBuildPhaseTask('integration-test'));
-    grunt.registerTask('phase-verify', createBuildPhaseTask('verify'));
-    grunt.registerTask('phase-install', createBuildPhaseTask('install'));
-    grunt.registerTask('phase-deploy', createBuildPhaseTask('deploy'));
+        /**
+         * Define build cycle tasks
+         */
+        grunt.registerTask(phase, createBuildCycleTask(phase));
 
-    /**
-     * Define build cycle tasks
-     */
-
-    grunt.registerTask('validate', createBuildCycleTask('validate'));
-    grunt.registerTask('compile', createBuildCycleTask('compile'));
-    grunt.registerTask('test', createBuildCycleTask('test'));
-    grunt.registerTask('package', createBuildCycleTask('package'));
-    grunt.registerTask('integration-test', createBuildCycleTask('integration-test'));
-    grunt.registerTask('verify', createBuildCycleTask('verify'));
-    grunt.registerTask('install', createBuildCycleTask('install'));
-    grunt.registerTask('deploy', createBuildCycleTask('deploy'));
+    });
 };
