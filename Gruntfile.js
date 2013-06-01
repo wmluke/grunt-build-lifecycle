@@ -80,7 +80,6 @@ module.exports = function (grunt) {
     grunt.registerTask('echo', function (message) {
         var done = this.async();
         var log = grunt.option('logfile');
-        console.log(log);
         FS.appendFile(Path.join(__dirname, log), message + "\n", function (err) {
             if (err) {
                 grunt.log.writeln(err);
