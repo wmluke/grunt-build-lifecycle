@@ -34,19 +34,28 @@ module.exports = function (grunt) {
             compile: ['echo:compile'],
             test: ['echo:test'],
             package: ['echo:package'],
-            integrationTest: ['echo:integrationTest'],
+            'integration-test': ['echo:integration-test'],
             verify: ['echo:verify'],
             install: ['echo:install'],
             deploy: ['echo:deploy']
         },
 
         shell: {
+            mkdirTmp: {
+                command: 'mkdir tmp'
+            },
             test1: {
                 command: 'grunt install --logfile=tmp/test1.log'
+            },
+            test2: {
+                command: 'grunt deploy --skip=validate,test --logfile=tmp/test2.log'
+            },
+            test3: {
+                command: 'grunt deploy --skipMatch=test --logfile=tmp/test3.log'
+            },
+            test4: {
+                command: 'grunt phase-compile --logfile=tmp/test4.log'
             }
-//            test2: {
-//                command: 'grunt deploy --logfile=tmp/test2.log --skipTests'
-//            }
 
         },
 

@@ -1,6 +1,6 @@
+validate
 compile
 package
-integration-test
 verify
 install
 deploy

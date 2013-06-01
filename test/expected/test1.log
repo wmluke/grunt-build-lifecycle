@@ -2,6 +2,6 @@ validate
 compile
 test
 package
-integrationTest
+integration-test
 verify
 install

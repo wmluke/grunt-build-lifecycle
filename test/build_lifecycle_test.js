@@ -2,47 +2,45 @@
 
 var grunt = require('grunt');
 
-/*
- ======== A Handy Little Nodeunit Reference ========
- https://github.com/caolan/nodeunit
-
- Test methods:
- test.expect(numAssertions)
- test.done()
- Test assertions:
- test.ok(value, [message])
- test.equal(actual, expected, [message])
- test.notEqual(actual, expected, [message])
- test.deepEqual(actual, expected, [message])
- test.notDeepEqual(actual, expected, [message])
- test.strictEqual(actual, expected, [message])
- test.notStrictEqual(actual, expected, [message])
- test.throws(block, [error], [message])
- test.doesNotThrow(block, [error], [message])
- test.ifError(value)
- */
-
 exports.build_lifecycle = {
     setUp: function (done) {
         // setup here if necessary
         done();
     },
-    test1: function (test) {
+    'test full build cycle': function (test) {
         test.expect(1);
 
         var actual = grunt.file.read('tmp/test1.log').trim();
         var expected = grunt.file.read('test/expected/test1.log').trim();
-        test.equal(actual, expected, 'should describe what the default behavior is.');
+        test.equal(actual, expected, 'should run all the build cycles');
+
+        test.done();
+    },
+    'test --skip option': function (test) {
+        test.expect(1);
+
+        var actual = grunt.file.read('tmp/test2.log').trim();
+        var expected = grunt.file.read('test/expected/test2.log').trim();
+        test.equal(actual, expected, 'should skip validate and test phases');
+
+        test.done();
+    },
+    'test --skipMatch option': function (test) {
+        test.expect(1);
+
+        var actual = grunt.file.read('tmp/test3.log').trim();
+        var expected = grunt.file.read('test/expected/test3.log').trim();
+        test.equal(actual, expected, 'should skip test phases');
+
+        test.done();
+    },
+    'test phase task': function (test) {
+        test.expect(1);
+
+        var actual = grunt.file.read('tmp/test4.log').trim();
+        var expected = grunt.file.read('test/expected/test4.log').trim();
+        test.equal(actual, expected, 'should only run the compile phase');
 
         test.done();
     }
-//    test2: function (test) {
-//        test.expect(1);
-//
-//        var actual = grunt.file.read('tmp/test2.log').trim();
-//        var expected = grunt.file.read('test/expected/test2.log').trim();
-//        test.equal(actual, expected, 'should describe what the default behavior is.');
-//
-//        test.done();
-//    }
 };

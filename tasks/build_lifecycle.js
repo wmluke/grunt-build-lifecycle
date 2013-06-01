@@ -11,8 +11,9 @@ module.exports = function (grunt) {
     'use strict';
 
     var _ = require('underscore');
+    _.str = require('underscore.string');
 
-    var buildPhases = _.chain(grunt.config.get('lifecycle')).keys().value();
+    var buildPhases = _(grunt.config.get('lifecycle')).keys();
 
     function createBuildPhaseTask(phase) {
         var phaseTasks = grunt.config.get('lifecycle.' + phase) || [];
@@ -30,9 +31,13 @@ module.exports = function (grunt) {
             })
             .value();
 
-        if (grunt.option('skipTests')) {
-            skip.push('phase-test');
-            skip.push('phase-integration-test');
+        var skipStar = grunt.option('skipMatch');
+        if (!_.str.isBlank(skipStar)) {
+            _(buildPhases).each(function (phase) {
+                if (_.str.include(phase, skipStar)) {
+                    skip.push(phase);
+                }
+            })
         }
 
         var phases = index > -1 ? buildPhases.slice(0, index + 1) : [];
@@ -48,6 +53,7 @@ module.exports = function (grunt) {
     }
 
     _.each(buildPhases, function (phase) {
+
         /**
          * Define build phase tasks
          */
