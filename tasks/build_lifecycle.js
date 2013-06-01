@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         var skip = _.chain((grunt.option('skip') || '').split(','))
             .compact()
             .map(function (phase) {
-                return phase.trim()
+                return phase.trim();
             })
             .value();
 
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                 if (_.str.include(phase, skipStar)) {
                     skip.push(phase);
                 }
-            })
+            });
         }
 
         var phases = index > -1 ? buildPhases.slice(0, index + 1) : [];
