@@ -10,7 +10,9 @@
 
 module.exports = function (grunt) {
 
-    // Project configuration.
+    var FS = require("fs"),
+        Path = require("path");
+
     grunt.initConfig({
         jshint: {
             all: [
@@ -23,9 +25,8 @@ module.exports = function (grunt) {
             }
         },
 
-        // Before generating any new files, remove any previously-created files.
         clean: {
-            tests: ['tmp']
+            tests: ['tmp/*']
         },
 
         lifecycle: {
@@ -39,6 +40,16 @@ module.exports = function (grunt) {
             deploy: ['echo:deploy']
         },
 
+        shell: {
+            test1: {
+                command: 'grunt install --logfile=tmp/test1.log'
+            }
+//            test2: {
+//                command: 'grunt deploy --logfile=tmp/test2.log --skipTests'
+//            }
+
+        },
+
         // Unit tests.
         nodeunit: {
             tests: ['test/*_test.js']
@@ -46,24 +57,30 @@ module.exports = function (grunt) {
     });
 
 
-    // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
 
-    // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
+    grunt.loadNpmTasks('grunt-shell');
 
-    // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-    // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'deploy', 'nodeunit']);
+    grunt.registerTask('test', ['clean', 'shell', 'nodeunit']);
 
-    // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'test']);
 
     grunt.registerTask('echo', function (message) {
-        grunt.log.writeln(message);
-        //grunt.file.write('./tmp/');
+        var done = this.async();
+        var log = grunt.option('logfile');
+        console.log(log);
+        FS.appendFile(Path.join(__dirname, log), message + "\n", function (err) {
+            if (err) {
+                grunt.log.writeln(err);
+                done();
+                return;
+            }
+            grunt.log.writeln(message);
+            done();
+        });
     });
 
 };

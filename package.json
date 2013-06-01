@@ -33,12 +33,16 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.1.2",
     "grunt": "~0.4.1",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "grunt-shell": "~0.2.2"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
   "keywords": [
     "gruntplugin"
-  ]
+  ],
+  "dependencies": {
+    "q-io": "~1.6.6"
+  }
 }
