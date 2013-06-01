@@ -2,6 +2,8 @@
 
 > Flexible build lifecycles for grunt
 
+[![Build Status](https://travis-ci.org/wmluke/grunt-build-lifecycle.png)](https://travis-ci.org/wmluke/grunt-build-lifecycle)
+
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
