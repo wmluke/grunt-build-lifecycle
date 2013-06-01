@@ -39,7 +39,12 @@
         "grunt": "~0.4.1"
     },
     "keywords": [
-        "gruntplugin"
+        "gruntplugin",
+        "build",
+        "lifecycle",
+        "task",
+        "phase",
+        "maven"
     ],
     "dependencies": {
         "underscore": "~1.4.4",

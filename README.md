@@ -41,7 +41,7 @@ grunt.initConfig({
             'concat',
             'uglify'
         ],
-        integrationTest: [
+        'integration-test': [
             'karma:e2e'
         ],
         verify: [],
@@ -57,17 +57,23 @@ This will create the following grunt tasks: `validate`, `compile`, `test`, `pack
 
 For example, `grunt test` runs the `validate`, `compile`, and `test` tasks.
 
+#### Phase Tasks
+
 You can run build phases individually with `grunt phase-<name>`, where name is one of the lifecycles.
 
 For example, based on the above example `grunt phase-compile` runs the `coffee` and `compass` tasks.
+
+#### Skip that
 
 Additionally, you can skip phases with the `--skip` parameter.
 
 For example, `grunt install --skip=validate,test` will skip the `validate` and `test` phases.
 
-To skip all tests phases, use `--skipTests`.
+To skip all tests phases, use `--skipMatch=test`.
 
-But that's not all.  You can define your own set of lifecycle phases.  Here's another example...
+#### Roll your own
+
+But that's not all.  If maven-ish build cycles are not your thing, you can define your own set of lifecycle phases.  Here's another example...
 
 ```js
 grunt.initConfig({
