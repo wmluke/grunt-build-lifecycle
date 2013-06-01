@@ -19,7 +19,11 @@ grunt.loadNpmTasks('grunt-build-lifecycle');
 
 ## The "lifecycle" task
 
-### Overview
+Inspired by the [maven build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html), the `lifecycle` task allows you to tame your grunt tasks with a consistent build lifecycle.
+
+This means that the process for compiling, testing, and packaging a particular project is clearly defined.  For the person building a project, this means that it is only necessary to learn a small set of commands to build any project, and the `lifecycle` task will ensure they get the results they desired.
+
+### Example
 In your project's Gruntfile, add a section named `lifecycle` to the data object passed into `grunt.initConfig()`.
 
 ```js
@@ -73,7 +77,7 @@ To skip all tests phases, use `--skipMatch=test`.
 
 #### Roll your own
 
-But that's not all.  If maven-ish build cycles are not your thing, you can define your own set of lifecycle phases.  Here's another example...
+Perhaps maven-ish build cycles are not your thing, you can define your own set of lifecycle phases.  Here's another example.  Just remeber, consistency is a good thing.
 
 ```js
 grunt.initConfig({
