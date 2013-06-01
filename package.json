@@ -1,7 +1,7 @@
 {
     "name": "grunt-build-lifecycle",
     "description": "Flexible build lifecycles for grunt",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "homepage": "https://github.com/wmluke/grunt-build-lifecycle",
     "author": {
         "name": "Luke Bunselmeyer",

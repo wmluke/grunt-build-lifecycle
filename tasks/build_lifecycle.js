@@ -13,7 +13,13 @@ module.exports = function (grunt) {
     var _ = require('underscore');
     _.str = require('underscore.string');
 
-    var buildPhases = _(grunt.config.get('lifecycle')).keys();
+    var lifecycle = grunt.config.get('lifecycle');
+    if(!lifecycle){
+        grunt.log.warn('Missing lifecycle task for the grunt-build-lifecycle plugin');
+        return;
+    }
+
+    var buildPhases = _(lifecycle).keys();
 
     function createBuildPhaseTask(phase) {
         var phaseTasks = grunt.config.get('lifecycle.' + phase) || [];
