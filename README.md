@@ -16,6 +16,7 @@ npm install grunt-build-lifecycle --save-dev
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
+// Must run after `grunt.initConfig`
 grunt.loadNpmTasks('grunt-build-lifecycle');
 ```
 
@@ -55,8 +56,13 @@ grunt.initConfig({
         deploy: [
             'server'
         ]
-    }
+    },
+
+    // other tasks...
 });
+
+// Must run after `grunt.initConfig`
+grunt.loadNpmTasks('grunt-build-lifecycle');
 ```
 
 This will create the following grunt tasks: `validate`, `compile`, `test`, `package`, `integration-test`, `verify`, `install`, and `deploy`.  Running any of these tasks will run all the preceding lifecycle tasks sequentially.
@@ -106,8 +112,13 @@ grunt.initConfig({
         run: [
             'server'
         ]
-    }
+    },
+
+    // other tasks...
 });
+
+// Must run after `grunt.initConfig`
+grunt.loadNpmTasks('grunt-build-lifecycle');
 ```
 
 ## Contributing
