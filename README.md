@@ -3,6 +3,7 @@
 > Flexible build lifecycles for grunt
 
 [![Build Status](https://travis-ci.org/wmluke/grunt-build-lifecycle.png)](https://travis-ci.org/wmluke/grunt-build-lifecycle)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wmluke/grunt-build-lifecycle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
