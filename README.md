@@ -86,7 +86,7 @@ To skip all tests phases, use `--skipMatch=test`.
 
 #### Roll your own
 
-Perhaps maven-ish build cycles are not your thing, you can define your own set of lifecycle phases.  Here's another example.  Just remeber, consistency is a good thing.
+Perhaps maven-ish build cycles are not your thing, you can define your own set of lifecycle phases.  Here's another example.  Just remember, consistency is a good thing.
 
 ```js
 grunt.initConfig({
